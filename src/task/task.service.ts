@@ -6,8 +6,7 @@ type TaskType = {
   id: number;
   title: string;
   isCompleted: boolean;
-}
-
+};
 
 @Injectable()
 export class TaskService {
@@ -56,35 +55,34 @@ export class TaskService {
 
   update(id: number, dto: UpdateTaskDto) {
 
-    const taskToUpdated = this.tasks.find((task) => task.id == id)
+    let taskToUpdate = this.findById(id)
 
-     const updatedTask = {
-      ...taskToUpdated,
-      isCompleted: dto.isCompleted,
-      title: dto.title,
-    }
+    // taskToUpdate.title = dto.title
+    // taskToUpdate.isCompleted = dto.isCompleted
 
-    //
-    //
-    // this.tasks = this.tasks.map(task=> task.id == id ? updatedTask : task)
+    Object.assign(taskToUpdate, dto)
 
-    const newTasks = this.tasks.map(task=> task.id == id ? updatedTask : task)
-
-
-    this.tasks = [...newTasks]
-
-    debugger
-
-
-    return newTasks
-
-
-    // return updatedTask
-
-
+    return taskToUpdate
 
   }
 
+  patchUpdate(id: number, dto: Partial<UpdateTaskDto>) {
 
+    const task = this.findById(id)
+
+    Object.assign(task, dto)
+
+    return task
+
+  }
+
+  delete(id: number) {
+
+    const taskToDelete = this.findById(id)
+
+    this.tasks = this.tasks.filter(task => task.id !== taskToDelete.id)
+
+    return true
+  }
 
 }
