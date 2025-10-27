@@ -54,13 +54,12 @@ export class TaskService {
   }
 
   update(id: number, dto: UpdateTaskDto) {
+    let taskToUpdate = this.findById(id);
 
-    let taskToUpdate = this.findById(id)
+    taskToUpdate.title = dto.title
+    taskToUpdate.isCompleted = dto.isCompleted
 
-    // taskToUpdate.title = dto.title
-    // taskToUpdate.isCompleted = dto.isCompleted
-
-    Object.assign(taskToUpdate, dto)
+    // Object.assign(taskToUpdate, dto)
 
     return taskToUpdate
 
