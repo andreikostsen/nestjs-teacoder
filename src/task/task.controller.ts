@@ -1,6 +1,7 @@
 import {
   Body,
-  Controller, Delete,
+  Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -35,7 +36,6 @@ export class TaskController {
     return this.taskService.update(id, dto);
   }
 
-
   @Patch('by-id/:id')
   patchUpdate(@Param('id') id: number, @Body() dto: Partial<UpdateTaskDto>) {
     return this.taskService.patchUpdate(id, dto);
@@ -45,7 +45,4 @@ export class TaskController {
   delete(@Param('id') id: number) {
     return this.taskService.delete(id);
   }
-
-
-
 }

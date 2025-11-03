@@ -1,20 +1,18 @@
-import { Controller, Get, Query, Headers } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { MovieService } from './movie.service';
+import { CreateMovieDto } from './dto/create-movie.dto';
 
-@Controller('movie')
+@Controller('movies')
 export class MovieController {
-  // constructor(private readonly movieService: MovieService) {}
+  constructor(private readonly movieService: MovieService) {}
 
-  @Get('headers')
-  getUserAgent(@Headers() headers: any) {
-    return headers;
+  @Get()
+  findAll() {
+    return this.movieService.findAll();
   }
 
-  @Get('all')
-  findAll(@Query() query: any) {
-    return JSON.stringify(query);
+  @Post()
+  create(@Body() dto: CreateMovieDto) {
+    return this.movieService.create(dto);
   }
-
-
 }
-

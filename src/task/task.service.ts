@@ -14,17 +14,17 @@ export class TaskService {
     {
       id: 1,
       title: 'Nest JS',
-      isCompleted: false
+      isCompleted: false,
     },
     {
       id: 2,
       title: 'JS',
-      isCompleted: true
-    }
-  ]
+      isCompleted: true,
+    },
+  ];
 
   findAll() {
-    return this.tasks
+    return this.tasks;
   }
 
   findById(id: number) {
@@ -41,10 +41,10 @@ export class TaskService {
 
     const {title} = dto
 
-    const newTask: TaskType= {
+    const newTask: TaskType = {
       id: this.tasks.length + 1,
       title,
-      isCompleted: false
+      isCompleted: false,
     }
 
     this.tasks.push(newTask);
